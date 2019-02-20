@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if contlc > 0 and contuc > 0 and endn %}
+        <div class="jumbotron">
+            <h1>Bem Vindo </h1>
+            <p>{{username}} !!</p> 
+        </div>
+    {% elif contlc == 0 and not endn %}
+        <div class="jumbotron">
+            <h1>Problemas no nome de usuario </h1>
+            <ul>
+                <li>Nome de usuario não terminou com numero</li>
+                <li>Nome de usuario não tem letra minuscula</li>
+            </ul>
+        </div>
+    {%else%}
+        <div class="jumbotron">
+        </div>
+    {% endif %}
+{% endblock %}
+
