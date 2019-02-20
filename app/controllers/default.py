@@ -1,22 +1,19 @@
-from app import app
-from flask import render_template, request
-@app.route("/")
-def index():
-    return render_template('index.html')
+import os
 
-@app.route("/report")
-def report():
-    username = request.args.get('username')
-    contuc = 0
-    contlc = 0
-    for lt in username:
-        if lt.islower():
-            contlc = contlc+1
-    for lt in username:
-        if lt.isupper():
-            contuc = contuc+1
-    endn = username[-1].isdigit() 
-    print(endn)
-    print(contlc)
-    print(contuc)
-    return render_template('report.html',username=username,contlc=contlc,contuc=contuc,endn=endn)
+from app import app
+from app import db
+from flask import render_template, request
+from flask_sqlalchemy import SQLAlchemy
+class Book(db.Model):
+    title = db.Column(db.String(80), unique=True, nullable=False, primary_key=True)
+    def __repr__(self):
+        return "<Title: {}>".format(self.title)
+
+@app.route("/", methods=["GET", "POST"])
+def home():
+    if request.form:
+        book = Book(title=request.form.get("title"))   
+        db.session.add(book)
+        db.session.commit()
+    books = Book.query.all()
+    return render_template("home.html",books=books)
