@@ -1,11 +1,27 @@
 {% extends "base.html" %}
+{% block title %}Listando os livros{% endblock %} 
 {% block content %}
-    
+
     <h1>Books</h1>
-    {% for book in books %}
-      <p>{{book.title}}</p>
-      <p>{{book.number_of_pages}}</p>
-      <p>{{book.rate}}</p>
-    {% endfor %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Number Pages</th>
+                <th scope="col">Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{book.id}}</td>
+                <td>{{book.title}}</td>
+                <td>{{book.number_of_pages}}</td>
+                <td>{{book.rate}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

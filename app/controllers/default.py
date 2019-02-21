@@ -6,8 +6,18 @@ from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from app.models.tables import Book
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def home():
+    return render_template("home.html")
+
+@app.route("/listbooks")
+def listbooks():
+    books = Book.query.all()
+    app.jinja_env.filters['page_title'] = "listbooks"
+    return render_template("listbooks.html",books=books)
+
+@app.route("/cadbook",methods=["GET", "POST"])
+def cadbook():
     if request.form:
         book = Book(
             title=request.form.get("title"),
@@ -16,5 +26,4 @@ def home():
         )   
         db.session.add(book)
         db.session.commit()
-    books = Book.query.all()
-    return render_template("home.html",books=books)
+    return render_template("cadbook.html")

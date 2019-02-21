@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <form method="POST" action="/">
+    <form method="POST" action="/cadbook">
       <label for="title">Title</label>
       <input type="text" name="title">
       <label for="numberpages">Number Of Pages</label>
@@ -10,11 +10,6 @@
       <input type="text" name="rate">
       <input type="submit" value="Add">
     </form>
-    <h1>Books</h1>
-    {% for book in books %}
-      <p>{{book.title}}</p>
-      <p>{{book.number_of_pages}}</p>
-      <p>{{book.rate}}</p>
-    {% endfor %}
+    
 
 {% endblock %}
