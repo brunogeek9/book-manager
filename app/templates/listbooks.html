@@ -2,7 +2,8 @@
 {% block title %}Listando os livros{% endblock %} 
 {% block content %}
 
-    <h1>Books</h1>
+<h3>List of Books</h3>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -10,16 +11,27 @@
                 <th scope="col">Title</th>
                 <th scope="col">Number Pages</th>
                 <th scope="col">Rate</th>
+                <th scope="col">#</th>
+                <th scope="col">#</th>                
             </tr>
         </thead>
         <tbody>
             {% for book in books %}
+            <form method="POST" action="./modifybook">
             <tr>
                 <td>{{book.id}}</td>
                 <td>{{book.title}}</td>
                 <td>{{book.number_of_pages}}</td>
                 <td>{{book.rate}}</td>
+                <input type="hidden" value="{{book.id}}" name="id">
+                <td>
+                    <input type="submit" value="delete" name="mode">
+                </td>
+                <td>
+                    <input type="submit" value="edit" name="mode">
+                </td>
             </tr>
+            </form>
             {% endfor %}
         </tbody>
     </table>

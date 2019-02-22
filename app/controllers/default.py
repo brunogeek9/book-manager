@@ -2,7 +2,7 @@ import os
 
 from app import app
 from app import db
-from flask import render_template, request
+from flask import render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from app.models.tables import Book
 
@@ -27,3 +27,37 @@ def cadbook():
         db.session.add(book)
         db.session.commit()
     return render_template("cadbook.html")
+
+@app.route("/editbook", methods=["GET","POST"])
+def editbook():
+    try:
+        newtitle=request.form.get("title")
+        newnpages = request.form.get("numberpages")
+        newrate = request.form.get("rate")
+        id = request.form.get("id")
+        book = Book.query.filter_by(id=id).first()
+        print(newtitle)
+        print(book.title)
+        book.title = newtitle
+        book.number_of_pages = newnpages
+        book.rate = newrate
+        db.session.commit()
+    except Exception as e:
+        print("Couldn't update book title")
+        print(e)
+    return redirect("/")
+    
+
+@app.route("/modifybook", methods=["GET","POST"])
+def modifybook():
+    id = request.form.get("id")
+    mode = request.form.get("mode")
+    print(id)
+    print(mode)
+    book = Book.query.filter_by(id=id).first()
+    if mode == "delete":
+        db.session.delete(book)
+        db.session.commit()
+        return redirect("/listbooks")
+    else:
+        return render_template("/cadbook.html",book=book)
