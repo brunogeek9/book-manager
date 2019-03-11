@@ -2,7 +2,7 @@ import os
 
 from app import app
 from app import db
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from app.models.tables import Book
 
@@ -26,6 +26,9 @@ def cadbook():
         )   
         db.session.add(book)
         db.session.commit()
+        flash('Cadastro efetuado com sucesso')
+        return redirect(url_for('cadbook'))
+
     return render_template("cadbook.html")
 
 @app.route("/editbook", methods=["GET","POST"])
@@ -56,8 +59,10 @@ def modifybook():
     print(mode)
     book = Book.query.filter_by(id=id).first()
     if mode == "delete":
+        flash('Livro ' +book.title+ ' deletado com sucesso')
         db.session.delete(book)
         db.session.commit()
+        
         return redirect("/listbooks")
     else:
         return render_template("/cadbook.html",book=book)
