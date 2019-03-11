@@ -61,3 +61,7 @@ def modifybook():
         return redirect("/listbooks")
     else:
         return render_template("/cadbook.html",book=book)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404

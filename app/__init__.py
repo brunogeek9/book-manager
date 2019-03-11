@@ -7,8 +7,6 @@ from flask_migrate import Migrate, MigrateCommand
 import os
 import socket
 
-# Connect to Redis
-#redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "bookdatabase.db"))
 
