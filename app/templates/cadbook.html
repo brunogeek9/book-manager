@@ -21,15 +21,29 @@
     </form>  
       
     {% else %}
-    <form method="POST" action="/cadbook">
+    <div class="cad" >
+      <form method="POST" action="/cadbook">
       <label for="title">Title</label>
-      <input type="text" name="title">
+      <input type="text" name="title" class="form-control">
       <label for="numberpages">Number Of Pages</label>
-      <input type="text" name="numberpages">
+      <input type="number" name="numberpages" class="form-control">
       <label for="rate">Rate</label>
-      <input type="text" name="rate">
-      <input type="submit" value="Cadastrar" name="mode">
-    </form>   
+      <input type="number" name="rate" class="form-control">
+      <style>
+        .cad{
+          width: 30%;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 1%;
+        }
+        #btncad{
+          margin-top: 5%;
+        }
+      </style>
+      <input id="btncad" type="submit" class="btn btn-primary btn-lg form-control" value="Cadastrar" name="mode">
+    </form> 
+    </div>
+      
     {% endif %}
   
     
