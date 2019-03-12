@@ -1,2 +1,2 @@
 # book manager
-##  simple web app to crud a books models
+simple web app to crud a books models
