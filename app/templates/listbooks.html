@@ -11,7 +11,7 @@
     {{message}}
     </div>
     {% endfor %}
-    <table class="table table-hover">
+    <table class="table table-hover bookslist">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -42,5 +42,9 @@
             {% endfor %}
         </tbody>
     </table>
-
+    <style>
+        .bookslist{
+            width: 80%;
+        }
+    </style>
 {% endblock %}
